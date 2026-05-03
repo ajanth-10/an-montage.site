@@ -1,21 +1,23 @@
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
-const currentYear = document.querySelector("#current-year");
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+const currentYear = document.getElementById("current-year");
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
 
-    if (navLinks.classList.contains("active")) {
-      menuToggle.textContent = "✕";
-      menuToggle.setAttribute("aria-label", "Fermer le menu");
-    } else {
-      menuToggle.textContent = "☰";
-      menuToggle.setAttribute("aria-label", "Ouvrir le menu");
-    }
+    const menuIsOpen = navLinks.classList.contains("active");
+
+    menuToggle.textContent = menuIsOpen ? "✕" : "☰";
+    menuToggle.setAttribute(
+      "aria-label",
+      menuIsOpen ? "Fermer le menu" : "Ouvrir le menu"
+    );
   });
 
-  document.querySelectorAll(".nav-links a").forEach((link) => {
+  const links = navLinks.querySelectorAll("a");
+
+  links.forEach((link) => {
     link.addEventListener("click", () => {
       navLinks.classList.remove("active");
       menuToggle.textContent = "☰";
